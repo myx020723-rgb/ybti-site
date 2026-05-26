@@ -266,7 +266,7 @@
                 <h3 class="text-xl font-bold text-secondary mb-4">想查看完整的YBTI人格报告？</h3>
                 <p class="text-gray-600 mb-6">转发朋友圈/小红书/抖音，即可免费解锁完整版报告，或者直接付费解锁</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button class="px-8 py-3 bg-primary text-white rounded-full font-medium shadow hover:shadow-lg transition-all">
+                                       <button id="inviteBtn" class="px-8 py-3 bg-primary text-white rounded-full font-medium shadow hover:shadow-lg transition-all">
                         <i class="fa fa-share-alt mr-2"></i>转发解锁完整版
                     </button>
                     <button class="px-8 py-3 bg-white text-primary border-2 border-primary rounded-full font-medium hover:bg-primary/5 transition-all">
@@ -274,6 +274,20 @@
                     </button>
                 </div>
                 <p class="text-gray-500 text-sm mt-4">已有128,456人完成了YBTI测试</p>
+            </div>
+            <!-- 邀请链接弹窗 -->
+            <div id="inviteModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-2xl p-6 max-w-sm w-full mx-4">
+                    <h3 class="text-xl font-bold text-secondary mb-4 text-center">你的专属邀请链接</h3>
+                    <p class="text-gray-600 text-center mb-4">把这个链接转发给好友，好友点击后就算你邀请成功啦~</p>
+                    <div class="bg-gray-100 rounded-xl p-4 mb-4 break-all">
+                        <span id="inviteLinkText" class="text-primary select-all"></span>
+                    </div>
+                    <p class="text-sm text-gray-500 text-center mb-6">👆 长按上面的链接，选择「复制」，然后转发给好友即可</p>
+                    <button id="closeModalBtn" class="w-full px-8 py-3 bg-primary text-white rounded-full font-medium shadow hover:shadow-lg transition-all">
+                        我知道了
+                    </button>
+                </div>
             </div>
             <!-- 重新测试 -->
             <div class="text-center mt-8">
@@ -1112,6 +1126,27 @@ document.getElementById('generateCardBtn').onclick = function() {
     }
 }
 
+// 修复微信内的邀请按钮功能
+function copyInviteLink() {
+    const inviteLink = siteUrl + '?invite=' + currentUserId;
+    document.getElementById('inviteLinkText').textContent = inviteLink;
+    document.getElementById('inviteModal').classList.remove('hidden');
+}
+
+// 弹窗关闭事件
+document.getElementById('closeModalBtn').addEventListener('click', () => {
+    document.getElementById('inviteModal').classList.add('hidden');
+});
+
+// 点击弹窗背景也能关闭
+document.getElementById('inviteModal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('inviteModal')) {
+        document.getElementById('inviteModal').classList.add('hidden');
+    }
+});
+
+// 重新绑定按钮事件
+document.getElementById('inviteBtn').addEventListener('click', copyInviteLink);
 </script>
 
     <!-- 备案号 -->
