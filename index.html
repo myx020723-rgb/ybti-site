@@ -1125,7 +1125,6 @@ document.getElementById('generateCardBtn').onclick = function() {
         }, 100);
     }
 }
-
 // 修复微信内的邀请按钮功能
 document.addEventListener('DOMContentLoaded', function() {
     function copyInviteLink() {
@@ -1135,12 +1134,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 弹窗关闭事件
-    document.getElementById('closeModalBtn').addEventListener('click', () => {
+    document.getElementById('closeModalBtn').addEventListener('click', function() {
         document.getElementById('inviteModal').classList.add('hidden');
     });
 
     // 点击弹窗背景也能关闭
-    document.getElementById('inviteModal').addEventListener('click', (e) => {
+    document.getElementById('inviteModal').addEventListener('click', function(e) {
         if (e.target === document.getElementById('inviteModal')) {
             document.getElementById('inviteModal').classList.add('hidden');
         }
